@@ -3,13 +3,12 @@ controller:
     map: ingress-nginx-controller
   namespace: ingress-nginx
 config:
-  repo: https://github.dev/WorldHealthOrganization/nginx-ingress-whitelister
+  repo: https://github.com/SchulzeStTSI/nginx-ingress-whitelister
   tag: dev
   seperator: "#---- WHITELIST ----"
 certificates:
   secret: gateway-ca-bundle
-  namespace: default
-  repo: ./tests/certs
+  repo: https://github.com/WorldHealthOrganization/tng-participants-dev
 ingress:
   name: gateway
   namespace: default

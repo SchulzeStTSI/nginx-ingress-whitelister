@@ -11,7 +11,7 @@ bundle_secret =  os.environ.get("CERTIFICATES_SECRET")
 api_instance = client.NetworkingV1Api()
 ingress = api_instance.read_namespaced_ingress(name=ingress_name,namespace=namespace)
 
-if ingress:
+if ingress and ingress != None:
    ingress.metadata.annotations["nginx.ingress.kubernetes.io/server-snippet"] = "if ($reject) { return 403; }"
    ingress.metadata.annotations["nginx.ingress.kubernetes.io/auth-tls-secret"] = namespace + "/" + bundle_secret
    ingress.metadata.annotations["nginx.ingress.kubernetes.io/auth-tls-verify-client"] = "on"

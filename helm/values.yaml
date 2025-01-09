@@ -8,7 +8,6 @@ config:
   seperator: "#---- WHITELIST ----"
 certificates:
   secret: gateway-ca-bundle
-  namespace: default
   repo: Location for Folder
 ingress:
   name: gateway
