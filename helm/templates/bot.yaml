@@ -21,6 +21,8 @@ spec:
             - name: {{ .Release.Name }}-bot
               image: alpine:3.18
               env: 
+                - name: RELEASE_NAME
+                  value: {{ .Release.Name }}
                 - name: TAG
                   value: {{ .Values.config.tag }}
                 - name: REPO
@@ -33,8 +35,6 @@ spec:
                   value: {{ .Values.controller.namespace }}
                 - name: CERTIFICATES_SECRET
                   value: {{ .Values.certificates.secret }}
-                - name: CONFIG_SEPERATOR
-                  value: {{ .Values.config.seperator | quote }}
                 - name: INGRESS_NAME
                   value: {{ .Values.ingress.name }}
                 - name: INGRESS_NAMESPACE

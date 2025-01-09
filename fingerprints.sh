@@ -2,7 +2,7 @@
 
 nginx_conf="$1/nginx_conf"
 
-echo 'map $ssl_client_fingerprint $reject {' > $nginx_conf
+echo 'map $ssl_client_fingerprint $'$2'_reject {' > $nginx_conf
 echo "default 1;" >> $nginx_conf
 
 for cert in $(/usr/bin/find $1 -path **/TLS/* -name TLS*.pem)

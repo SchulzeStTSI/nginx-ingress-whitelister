@@ -5,7 +5,6 @@ controller:
 config:
   repo: https://github.com/SchulzeStTSI/nginx-ingress-whitelister
   tag: dev
-  seperator: "#---- WHITELIST ----"
 certificates:
   secret: gateway-ca-bundle
   repo: https://github.com/WorldHealthOrganization/tng-participants-dev

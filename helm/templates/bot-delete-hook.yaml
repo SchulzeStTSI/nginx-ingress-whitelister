@@ -11,8 +11,10 @@ spec:
       serviceAccountName: {{ .Release.Name }}-service-account
       containers:
         - name: {{ .Release.Name }}-bot-delete-hook
-          image: alpine
+          image: alpine:3.18
           env: 
+            - name: RELEASE_NAME
+              value: {{ .Release.Name }}
             - name: TAG
               value: {{ .Values.config.tag }}
             - name: REPO
@@ -23,8 +25,6 @@ spec:
               value: {{ .Values.controller.config.map }}
             - name: CERTFICATES_SECRET
               value: {{ .Values.certificates.secret }}
-            - name: CONFIG_SEPERATOR
-              value: {{ .Values.config.seperator | quote }}
             - name: INGRESS_NAME
               value: {{ .Values.ingress.name }}
             - name: INGRESS_NAMESPACE

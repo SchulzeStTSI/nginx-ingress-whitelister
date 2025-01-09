@@ -13,7 +13,7 @@ data:
     git clone $REPO --branch $TAG bot
     git clone $CERTIFICATES_REPO certificateFolder 
     pip install -r /bot/requirements.txt > /dev/null
-    ./bot/fingerprints.sh ./../certificateFolder
+    ./bot/fingerprints.sh ./../certificateFolder {{ .Release.Name }}
     python /bot/updateFingerprints.py ./../certificateFolder/nginx_conf
     python /bot/updateCaBundle.py /certificateFolder
     python /bot/annotateIngress.py

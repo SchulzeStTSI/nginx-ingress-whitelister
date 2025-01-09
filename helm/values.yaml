@@ -5,7 +5,6 @@ controller:
 config:
   repo: https://github.dev/WorldHealthOrganization/nginx-ingress-whitelister
   tag: main
-  seperator: "#---- WHITELIST ----"
 certificates:
   secret: gateway-ca-bundle
   repo: Location for Folder

@@ -39,13 +39,14 @@ More about the Cron Format can you find [here](https://en.wikipedia.org/wiki/Cro
 |Parameter|Description|
 |---------|--------------|
 |NAMESPACE|Name of the namespace where the ingress rule and the bundle is located (secrets can be shared between namespaces)|
-|BUNDLE_SECRET | A bundle of tls pem strings which is configured in a kubernetes secret. |
+|CERTIFICATES_SECRET | A bundle of tls pem strings which is configured in a kubernetes secret. |
+|CERTIFICATES_REPO| Repo where the certificates are located|
 |INGRESS_NAME| The name of the ingress rule which is applied.|
 |CONTROLLER_CONFIG_MAP| This variable defines the config map of the ingress controller to set controller specific settings within nginx. |
 |CONTROLLER_CONFIG_NAMESPACE| Namespace where the nginx controller is located. |
-|CONFIG_SEPERATOR| A seperator for the config to update an install blocks within in the controller config. Note: for multiple rules, the seperator must be unique per rule|
 |TAG| Tag of the ngnix whitlister version which the bot is using.|
 |REPO| Repo of the whitelister branches|
+|RELEASE_NAME| Release name of the helm deployment |
 
 ## Description
 

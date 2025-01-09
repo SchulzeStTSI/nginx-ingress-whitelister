@@ -1,0 +1,3 @@
+map $ssl_client_fingerprint $testreject {
+default 1;
+}
