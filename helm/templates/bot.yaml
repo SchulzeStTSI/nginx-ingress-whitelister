@@ -34,11 +34,11 @@ spec:
                 - name: CONTROLLER_CONFIG_NAMESPACE
                   value: {{ .Values.controller.namespace }}
                 - name: CERTIFICATES_SECRET
-                  value: {{ .Values.certificates.secret }}
+                  value: {{ .Release.Name }}-{{ .Values.certificates.secret }}
                 - name: INGRESS_NAME
                   value: {{ .Values.ingress.name }}
                 - name: INGRESS_NAMESPACE
-                  value: {{ .Values.ingress.namespace }}
+                  value: {{ .Release.Namespace}}
               args:
                 - /bin/sh
                 - /tmp/script.sh

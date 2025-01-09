@@ -10,6 +10,5 @@ certificates:
   repo: Location for Folder
 ingress:
   name: gateway
-  namespace: default
 job: 
   schedule: '*/1 * * * *'

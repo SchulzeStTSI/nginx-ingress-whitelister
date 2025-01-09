@@ -7,7 +7,7 @@ config.load_incluster_config()
 release_name=os.environ.get("RELEASE_NAME")
 controller_config_namespace = os.environ.get("CONTROLLER_CONFIG_NAMESPACE")
 controller_config_name=os.environ.get("CONTROLLER_CONFIG_MAP")
-config_seperator=release_name+"_WHITELIST"
+config_seperator="#-------"+release_name+"_WHITELIST"
 
 if not controller_config_namespace or not controller_config_name:
     print("Config Namespace or Config Map not configured")

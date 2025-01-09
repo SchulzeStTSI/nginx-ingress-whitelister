@@ -24,11 +24,11 @@ spec:
             - name: CONTROLLER_CONFIG_MAP
               value: {{ .Values.controller.config.map }}
             - name: CERTFICATES_SECRET
-              value: {{ .Values.certificates.secret }}
+              value: {{ .Release.Name }}-{{ .Values.certificates.secret }}
             - name: INGRESS_NAME
               value: {{ .Values.ingress.name }}
             - name: INGRESS_NAMESPACE
-              value: {{ .Values.ingress.namespace }}
+              value: {{ .Release.Namespace}}
           command: ["sh", "-c", "apk add --update py-pip	> /dev/null;apk add --update py-pip	> /dev/null;apk add --update git > /dev/null; apk add --update bash > /dev/null;git clone $REPO --branch $TAG bot;  pip install -r /bot/requirements.txt > /dev/null;python /bot/removeFingerprints.py; python /bot/removeIngressAnnotation.py"]
           imagePullPolicy: Always
       restartPolicy: Never
