@@ -4,7 +4,7 @@ import os
 
 config.load_incluster_config()
 
-namespace = os.environ.get("NAMESPACE")
+namespace = os.environ.get("INGRESS_NAMESPACE")
 ingress_name=os.environ.get("INGRESS_NAME")
 bundle_secret =  os.environ.get("CERTIFICATES_SECRET")
 
