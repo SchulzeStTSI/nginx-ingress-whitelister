@@ -25,17 +25,15 @@ spec:
                   value: {{ .Values.config.tag }}
                 - name: REPO
                   value: {{ .Values.config.repo }}
-                - name: CERTIFICATEFOLDER
-                  value: {{ .Values.bundle.repo }}
-                - name: CONFIG_MAP
-                  value: {{ .Values.config.map }}
-                - name: CONFIG_NAMESPACE
-                  value: {{ .Release.Namespace }}
-                - name: BUNDLE_NAMESPACE
-                  value: {{ .Values.bundle.namespace }}
-                - name: BUNDLE_NAME
-                  value: {{ .Values.bundle.name }}
-                - name: SEPERATOR
+                - name: BUNDLE_REPO
+                  value: {{ .Values.certificates.certificateFolder }}
+                - name: CONTROLLER_CONFIG_MAP
+                  value: {{ .Values.controller.config.map }}
+                - name: CONTROLLER_CONFIG_NAMESPACE
+                  value: {{ .Values.controller.namespace }}
+                - name: BUNDLE_SECRET
+                  value: {{ .Values.certificates.secret }}
+                - name: CONFIG_SEPERATOR
                   value: {{ .Values.config.seperator | quote }}
                 - name: INGRESS_NAME
                   value: {{ .Values.ingress.name }}

@@ -1,12 +1,15 @@
+controller:
+  config:
+    map: addon-http-application-routing-nginx-configuration
+  namespace: ingress-nginx
 config:
-  map: addon-http-application-routing-nginx-configuration
   repo: https://github.dev/WorldHealthOrganization/nginx-ingress-whitelister
   tag: main
   seperator: "#---- WHITELIST ----"
-bundle:
-  name: gateway-ca-bundle
+certificates:
+  secret: gateway-ca-bundle
   namespace: default
-  repo: Location for Folder
+  certificateFolder: Location for Folder
 ingress:
   name: gateway
   namespace: default

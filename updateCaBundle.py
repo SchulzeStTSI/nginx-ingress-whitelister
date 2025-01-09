@@ -5,8 +5,8 @@ from kubernetes import client, config
 
 config.load_incluster_config()
 
-bundle_namespace = os.environ.get("BUNDLE_NAMESPACE")
-bundle_name=os.environ.get("BUNDLE_NAME")
+ingress_namespace = os.environ.get("INGRESS_NAMESPACE")
+bundle_secret=os.environ.get("BUNDLE_SECRET")
 files = glob.glob("./certificateFolder/**/TLS/CA*.pem", recursive=True)
 ca_bundle = ""
 for file in files:
@@ -21,7 +21,7 @@ if len(files) and ca_bundle:
   body.data = {'ca.crt': str(base64.b64encode(bytes(ca_bundle,"utf-8")),"utf-8")}
   body.kind = 'Secret'
   body.type = 'Opaque'
-  api_instance.patch_namespaced_secret(namespace=bundle_namespace,name=bundle_name, body=body)
+  api_instance.patch_namespaced_secret(namespace=ingress_namespace,name=bundle_secret, body=body)
 else: 
   print("No files found or empty CA bundle")
     

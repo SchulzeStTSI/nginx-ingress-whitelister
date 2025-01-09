@@ -4,15 +4,15 @@ import os
 
 config.load_incluster_config()
 
-config_namespace = os.environ.get("CONFIG_NAMESPACE")
-config_name=os.environ.get("CONFIG_MAP")
-config_seperator=os.environ.get("SEPERATOR")
+controller_config_namespace = os.environ.get("CONTROLLER_CONFIG_NAMESPACE")
+controller_config_name=os.environ.get("CONTROLLER_CONFIG_MAP")
+config_seperator=os.environ.get("CONFIG_SEPERATOR")
 
-if not config_namespace or not config_name:
+if not controller_config_namespace or not controller_config_name:
     print("Config Namespace or Config Map not configured")
 else: 
     api_instance = client.CoreV1Api()
-    cmap = api_instance.read_namespaced_config_map(name=config_name, namespace=config_namespace)
+    cmap = api_instance.read_namespaced_config_map(name=controller_config_name, namespace=controller_config_namespace)
     seperator = config_seperator
     if "http-snippet" in cmap.data:
         existingconfig = cmap.data["http-snippet"]
@@ -25,4 +25,4 @@ else:
         if httpSnippet == "":
             del cmap.data["http-snippet"]
      
-    api_instance.replace_namespaced_config_map(namespace=config_namespace,name=config_name, body=cmap)
+    api_instance.replace_namespaced_config_map(namespace=controller_config_namespace,name=controller_config_name, body=cmap)

@@ -1,0 +1,17 @@
+controller:
+  config:
+    map: ingress-nginx-controller
+  namespace: ingress-nginx
+config:
+  repo: https://github.dev/WorldHealthOrganization/nginx-ingress-whitelister
+  tag: dev
+  seperator: "#---- WHITELIST ----"
+certificates:
+  secret: gateway-ca-bundle
+  namespace: default
+  repo: ./tests/certs
+ingress:
+  name: gateway
+  namespace: default
+job: 
+  schedule: '*/1 * * * *'

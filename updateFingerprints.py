@@ -7,9 +7,9 @@ config.load_incluster_config()
 with open(sys.argv[1]) as f:
     data = f.read()
 
-config_namespace = os.environ.get("CONFIG_NAMESPACE")
-config_name=os.environ.get("CONFIG_MAP")
-config_seperator=os.environ.get("SEPERATOR")
+config_namespace = os.environ.get("CONTROLLER_CONFIG_NAMESPACE")
+config_name=os.environ.get("CONTROLLER_CONFIG_MAP")
+config_seperator=os.environ.get("CONFIG_SEPERATOR")
 
 if not config_namespace or not config_name:
     print("Config Namespace or Config Map not configured")

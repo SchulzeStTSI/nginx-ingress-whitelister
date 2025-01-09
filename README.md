@@ -23,11 +23,50 @@ The val.yaml is a values file where you can override the default values e.g. :
 ```
 config:
  tag: v1
-bundle:
+certificates:
  repo: https://github.com/{CHANGEME}/{CHANGEME}.git
 ingress:
  name: myIngress
 job:
  shedule: {yourShedule} # Unix Cron Format
 ```
-More about the Cron Format can you find [here](https://en.wikipedia.org/wiki/Cron)  
+More about the Cron Format can you find [here](https://en.wikipedia.org/wiki/Cron) 
+
+# Scripts
+
+## General Parameters
+
+|Parameter|Description|
+|---------|--------------|
+|NAMESPACE|Name of the namespace where the ingress rule and the bundle is located (secrets can be shared between namespaces)|
+|BUNDLE_SECRET | A bundle of tls pem strings which is configured in a kubernetes secret. |
+|INGRESS_NAME| The name of the ingress rule which is applied.|
+|CONTROLLER_CONFIG_MAP| This variable defines the config map of the ingress controller to set controller specific settings within nginx. |
+|CONTROLLER_CONFIG_NAMESPACE| Namespace where the nginx controller is located. |
+|CONFIG_SEPERATOR| A seperator for the config to update an install blocks within in the controller config. Note: for multiple rules, the seperator must be unique per rule|
+|TAG| Tag of the ngnix whitlister version which the bot is using.|
+|REPO| Repo of the whitelister branches|
+
+## Description
+
+|Script|Description|
+|----------|----------|
+|[Annotate ingress](./annotateIngress.py) | Searches for an ingress rule in a namespace and annotates the nginx ingress rule with the certificate bundle which was uploaded/defined in a secret. This secret is configured in the [auth-tls](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#client-certificate-authentication) annotation of the rule to unlock traffic protected by the configured certificate.|
+|[Fingerprint](fingerprints.sh)| generates for nginx an fingerprint mapping across all certificates in the folder, which is later on configured in the configuration snippets of the ingress configuration map [http-snippet](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#http-snippet) (default located unter: nginx-ingress/addon-http-application-routing-nginx-configuration or similar)|
+|[Remove CA Bundle](removeCaBundle.py)| removes the Bundle Secret from the namespace during uninstall of the helm package.|
+|[Remove Fingerprints](removeFingerprints.py)| removes the fingerprints von the nginx config during the uninstall of the helm package.|
+|[Remove Ingress Annotation](removeIngressAnnotation.py)| removes the annotations from the rule which is observed.|
+|[Update CA Bundle](updateCaBundle.py)| updates the bundle secret with the latest packages found in certificate folder|
+|[Update Fingerprints](updateFingerprints.py)| updates the fingerprints in the controller config seperated by the config_seperator|
+
+
+# Test Setup 
+
+## Kubernetes 
+
+Install for testing the latest ranger desktop and follow the [nginx install instructions](https://docs.rancherdesktop.io/how-to-guides/setup-NGINX-Ingress-Controller/). Alternativly k3s or minikube works as well.
+
+## Pytest
+
+Install pytest and navigate to the tests folder. Execute it by pytest or by using python -m pytest.
+
