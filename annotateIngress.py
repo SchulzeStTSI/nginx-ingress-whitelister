@@ -27,5 +27,5 @@ except ApiException as e:
         print(f"Ingress '{ingress_name}' im Namespace '{namespace}' not existing.")
         ingress = None
     else:
-        print(f"Ein Fehler ist aufgetreten: {e}")
+        print(f"An error was raised: {e}")
         raise
