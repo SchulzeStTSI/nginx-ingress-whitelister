@@ -18,6 +18,10 @@ else:
     cmap = api_instance.read_namespaced_config_map(name=config_name, namespace=config_namespace)
     seperator = config_seperator
     newBlock = "\n"+ seperator +"\n" + data + seperator+"\n"
+
+    if cmap.data is None:
+        cmap.data = {}
+
     if "http-snippet" in cmap.data:
         existingconfig = cmap.data["http-snippet"]
         map = existingconfig.split(seperator)
