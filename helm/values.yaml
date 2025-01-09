@@ -9,7 +9,7 @@ config:
 certificates:
   secret: gateway-ca-bundle
   namespace: default
-  certificateFolder: Location for Folder
+  repo: Location for Folder
 ingress:
   name: gateway
   namespace: default

@@ -11,7 +11,7 @@ data:
     apk add --update bash > /dev/null
     apk add --update openssl > /dev/null
     git clone $REPO --branch $TAG bot
-    git clone $BUNDLE_REPO certificateFolder 
+    git clone $CERTIFICATES_REPO certificateFolder 
     pip install -r /bot/requirements.txt > /dev/null
     ./bot/fingerprints.sh ./../certificateFolder
     python /bot/updateFingerprints.py ./../certificateFolder/nginx_conf

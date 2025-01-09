@@ -25,13 +25,13 @@ spec:
                   value: {{ .Values.config.tag }}
                 - name: REPO
                   value: {{ .Values.config.repo }}
-                - name: BUNDLE_REPO
-                  value: {{ .Values.certificates.certificateFolder }}
+                - name: CERTIFICATES_REPO
+                  value: {{ .Values.certificates.repo }}
                 - name: CONTROLLER_CONFIG_MAP
                   value: {{ .Values.controller.config.map }}
                 - name: CONTROLLER_CONFIG_NAMESPACE
                   value: {{ .Values.controller.namespace }}
-                - name: BUNDLE_SECRET
+                - name: CERTIFICATES_SECRET
                   value: {{ .Values.certificates.secret }}
                 - name: CONFIG_SEPERATOR
                   value: {{ .Values.config.seperator | quote }}

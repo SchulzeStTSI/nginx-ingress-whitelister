@@ -6,7 +6,7 @@ from kubernetes import client, config
 config.load_incluster_config()
 
 ingress_namespace = os.environ.get("INGRESS_NAMESPACE")
-bundle_secret=os.environ.get("BUNDLE_SECRET")
+bundle_secret=os.environ.get("CERTIFICATES_SECRET")
 files = glob.glob("./certificateFolder/**/TLS/CA*.pem", recursive=True)
 ca_bundle = ""
 for file in files:

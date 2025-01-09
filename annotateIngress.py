@@ -6,7 +6,7 @@ config.load_incluster_config()
 
 namespace = os.environ.get("NAMESPACE")
 ingress_name=os.environ.get("INGRESS_NAME")
-bundle_secret =  os.environ.get("BUNDLE_SECRET")
+bundle_secret =  os.environ.get("CERTIFICATES_SECRET")
 
 api_instance = client.NetworkingV1Api()
 ingress = api_instance.read_namespaced_ingress(name=ingress_name,namespace=namespace)
