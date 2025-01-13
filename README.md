@@ -63,6 +63,10 @@ More about the Cron Format can you find [here](https://en.wikipedia.org/wiki/Cro
 
 # Test Setup 
 
+## Helm
+
+Install on your device the helm software for installing helm charts.
+
 ## Kubernetes 
 
 Install for testing the latest ranger desktop and follow the [nginx install instructions](https://docs.rancherdesktop.io/how-to-guides/setup-NGINX-Ingress-Controller/). Alternativly k3s or minikube works as well.
