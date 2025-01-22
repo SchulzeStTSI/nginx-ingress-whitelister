@@ -29,6 +29,14 @@ spec:
                   value: {{ .Values.config.repo }}
                 - name: CERTIFICATES_REPO
                   value: {{ .Values.certificates.repo }}
+                - name: CERTIFICATES_REPO
+                  value: {{ .Values.certificates.repo }}
+                - name: CERTIFICATES_CERTFILEPATTERN
+                  value: {{ .Values.certificates.certFilePattern }}
+                - name: CERTIFICATES_CAFILEPATTERN
+                  value: {{ .Values.certificates.caFilePattern }}
+                - name: CERTIFICATES_SOURCEFOLDER
+                  value: {{ .Values.certificates.sourceFolder }}
                 - name: CONTROLLER_CONFIG_MAP
                   value: {{ .Values.controller.config.map }}
                 - name: CONTROLLER_CONFIG_NAMESPACE
@@ -37,6 +45,8 @@ spec:
                   value: {{ .Release.Name }}-{{ .Values.certificates.secret }}
                 - name: INGRESS_NAME
                   value: {{ .Values.ingress.name }}
+                - name: INGRESS_NAMESPACE
+                  value: {{ .Release.Namespace}}
                 - name: INGRESS_NAMESPACE
                   value: {{ .Release.Namespace}}
               args:

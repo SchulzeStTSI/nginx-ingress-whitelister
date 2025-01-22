@@ -7,8 +7,11 @@ config.load_incluster_config()
 
 ingress_namespace = os.environ.get("INGRESS_NAMESPACE")
 bundle_secret=os.environ.get("CERTIFICATES_SECRET")
+caPattern=os.environ.get("CERTIFICATES_CAFILEPATTERN")
+sourceFolder=os.environ.get("CERTIFICATES_sourceFolder")
 
-files = glob.glob("./certificateFolder/**/TLS/CA*.pem", recursive=True)
+files = glob.glob("./certificateFolder/**/"+sourceFolder+"/"+caPattern, recursive=True)
+
 ca_bundle = ""
 for file in files:
   with open(file) as f:

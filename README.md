@@ -32,6 +32,22 @@ job:
 ```
 More about the Cron Format can you find [here](https://en.wikipedia.org/wiki/Cron) 
 
+# Bot Process
+
+``` mermaid
+sequenceDiagram
+    Bot ->> Git: Clone Certificate Repo
+    Git ->> Git: Download Certificate Repo
+    Bot ->> fingerprints.sh: Start calc
+    fingerprints.sh ->> fingerprints.sh: Write nginx_conf with LB rules
+    Bot->> updateFingerprints.py: Start Updateing Ingress Controller
+    updateFingerprints.py ->> updateFingerprints.py: Write http snippet in config map of ingress controller
+    Bot->> updateCaBundle.py: Start CaBundle Update
+    updateCaBundle.py->> updateCaBundle.py: Collect CA Files and update CA Bundle Secret
+    Bot->>annotateIngress.py: Start Annotation
+    annotateIngress.py->> annotateIngress.py: Set Secret in Ingress Rule X  
+```
+
 # Scripts
 
 ## General Parameters
@@ -41,6 +57,9 @@ More about the Cron Format can you find [here](https://en.wikipedia.org/wiki/Cro
 |NAMESPACE|Name of the namespace where the ingress rule and the bundle is located (secrets can be shared between namespaces)|
 |CERTIFICATES_SECRET | A bundle of tls pem strings which is configured in a kubernetes secret. |
 |CERTIFICATES_REPO| Repo where the certificates are located|
+|CERTIFICATES_SOURCEFOLDER|This folder defines where the certificates shall be search for in the downloaded repo. e.g. **/TLS/*|
+|CERTIFICATES_CERTFILEPATTERN| This pattern is used for search for certificates in the source folder which are used for pinning in the controller.|
+|CERTIFICATES_CAFILEPATTERN|This is the pattern for the search for CA files which are later used in the secret.|
 |INGRESS_NAME| The name of the ingress rule which is applied.|
 |CONTROLLER_CONFIG_MAP| This variable defines the config map of the ingress controller to set controller specific settings within nginx. |
 |CONTROLLER_CONFIG_NAMESPACE| Namespace where the nginx controller is located. |
@@ -73,5 +92,9 @@ Install for testing the latest ranger desktop and follow the [nginx install inst
 
 ## Pytest
 
-Install pytest and navigate to the tests folder. Execute it by pytest or by using python -m pytest.
+Install pytest and navigate to the tests folder. Execute it by pytest or by using 
+
+```
+python -m pytest
+```
 

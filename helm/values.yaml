@@ -8,6 +8,12 @@ config:
 certificates:
   secret: gateway-ca-bundle
   repo: Location for Folder
+  sourceFolder: TLS
+  certFilePattern: TLS*.pem
+  caFilePattern: CA*.pem
+  did:
+    enable: true
+    resolverUrl: http://localhost:8080/1.0/identifiers/
 ingress:
   name: gateway
 job: 
