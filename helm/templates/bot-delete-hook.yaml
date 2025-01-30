@@ -15,16 +15,10 @@ spec:
           env: 
             - name: RELEASE_NAME
               value: {{ .Release.Name }}
-            - name: TAG
-              value: {{ .Values.config.tag }}
-            - name: REPO
-              value: {{ .Values.config.repo }}
             - name: CONTROLLER_CONFIG_NAMESPACE
               value: {{ .Values.controller.namespace }}
             - name: CONTROLLER_CONFIG_MAP
               value: {{ .Values.controller.config.map }}
-            - name: CERTFICATES_SECRET
-              value: {{ .Release.Name }}-{{ .Values.certificates.secret }}
             - name: INGRESS_NAME
               value: {{ .Values.ingress.name }}
             - name: INGRESS_NAMESPACE

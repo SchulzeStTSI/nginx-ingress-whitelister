@@ -5,7 +5,7 @@ nginx_conf="$1/nginx_conf"
 echo 'map $ssl_client_fingerprint $'$2'_reject {' > $nginx_conf
 echo "default 1;" >> $nginx_conf
 
-for cert in $(/usr/bin/find $1 -path **/$3/* -name $4)
+for cert in $(/usr/bin/find $1 -path **/* -name $3)
 do
     # Check for valid PEM
     if [ -r "$cert" ] && openssl x509 -in "$cert" -noout > /dev/null 2>&1; then

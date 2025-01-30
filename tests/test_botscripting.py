@@ -1,5 +1,5 @@
 import pytest
-from testUtils import helm_chart, wait_for_job_log
+from testUtils import helm_chart,setup_helm_chart,teardown_helm_chart, wait_for_job_log
 
 # Pytest test
 @pytest.mark.parametrize("release_name,deployment_name,helm_chart_values,values_file", [

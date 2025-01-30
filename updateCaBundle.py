@@ -2,21 +2,21 @@ import os
 import glob
 import base64
 from kubernetes import client, config
+import sys
 
 config.load_incluster_config()
 
 ingress_namespace = os.environ.get("INGRESS_NAMESPACE")
 bundle_secret=os.environ.get("CERTIFICATES_SECRET")
-caPattern=os.environ.get("CERTIFICATES_CAFILEPATTERN")
-sourceFolder=os.environ.get("CERTIFICATES_sourceFolder")
 
-files = glob.glob("./certificateFolder/**/"+sourceFolder+"/"+caPattern, recursive=True)
+files = glob.glob(sys.argv[1]+"/*.pem", recursive=True)
 
 ca_bundle = ""
 for file in files:
-  with open(file) as f:
-    data = f.read()
-  ca_bundle = ca_bundle+"\n"+data
+    with open(file) as f:
+        data = f.read()
+    ca_bundle = ca_bundle+"\n"+data
+
   
 if len(files) and ca_bundle:
   api_instance = client.CoreV1Api()

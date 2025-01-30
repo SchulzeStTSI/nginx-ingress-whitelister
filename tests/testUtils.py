@@ -47,7 +47,7 @@ def wait_for_job_log(job_name, namespace, search_text, timeout=200, interval=10)
     return False
 
 # Generic reusable fixture for installing Helm charts
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def setup_helm_chart():
     def _setup(release_name, chart_path, namespace, values=None, values_file=None):
         install_helm_chart(release_name, chart_path, namespace, values, values_file)
@@ -56,7 +56,7 @@ def setup_helm_chart():
     yield _setup
 
 # Generic reusable fixture for cleaning up Helm charts
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def teardown_helm_chart():
     def _teardown(release_name, namespace):
         uninstall_helm_chart(release_name, namespace)
@@ -64,7 +64,7 @@ def teardown_helm_chart():
     yield _teardown
 
 # Combined setup and teardown fixture for tests
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def helm_chart(setup_helm_chart, teardown_helm_chart):
     created_releases = []
 

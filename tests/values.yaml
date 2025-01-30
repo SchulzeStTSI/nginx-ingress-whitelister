@@ -5,15 +5,23 @@ controller:
 config:
   repo: https://github.com/SchulzeStTSI/nginx-ingress-whitelister
   tag: dev
+  configLoader:
+    - internal.configLoader.didConfigMapLoader.didConfigMapLoader
+    - internal.configLoader.gitRepoEnvMapLoader.gitRepoEnvMapLoader
+  pubKeyLoader:
+    - internal.pubKeyLoader.didLoader.didLoader
+    - internal.pubKeyLoader.x509Loader.x509Loader
 certificates:
   secret: gateway-ca-bundle
+  certPinning: "true"
+pubKeyLoader:
+ x509:
   repo: https://github.com/WorldHealthOrganization/tng-participants-dev
   sourceFolder: TLS
   certFilePattern: TLS*.pem
   caFilePattern: CA*.pem
-  did:
-    enable: true
-    resolverUrl: http://localhost:8080/1.0/identifiers/
+ did:
+  resolverUrl: http://localhost:8080/1.0/identifiers/
 ingress:
   name: test-ingress
 job: 

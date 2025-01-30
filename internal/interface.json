@@ -1,0 +1,25 @@
+{
+  "services": {
+    "pubKeyLoader": {
+      "functions": {
+        "loadKeys": {
+          "parameters": [
+            {"name": "self", "type": "None"},
+            {"name": "config", "type": "dict"}
+          ],
+          "return_type": "None"
+        }
+      }
+    },
+    "configLoader": {
+      "functions": {
+        "load": {
+          "parameters": [
+            {"name": "self", "type": "None"}
+          ],
+          "return_type": "dict"
+        }
+      }
+    }
+  }
+}

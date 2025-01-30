@@ -17,32 +17,44 @@ spec:
               configMap:
                 name: {{ .Release.Name }}-bot-config
                 defaultMode: 420
+            - name: {{ .Release.Name }}-did-config
+              configMap:
+                name: {{ .Release.Name }}-did-config
+                defaultMode: 420
           containers:
             - name: {{ .Release.Name }}-bot
               image: alpine:3.18
-              env: 
+              env:  
                 - name: RELEASE_NAME
                   value: {{ .Release.Name }}
-                - name: TAG
+                - name: CONFIG_TAG
                   value: {{ .Values.config.tag }}
-                - name: REPO
+                - name: CONFIG_REPO
                   value: {{ .Values.config.repo }}
-                - name: CERTIFICATES_REPO
-                  value: {{ .Values.certificates.repo }}
-                - name: CERTIFICATES_REPO
-                  value: {{ .Values.certificates.repo }}
-                - name: CERTIFICATES_CERTFILEPATTERN
-                  value: {{ .Values.certificates.certFilePattern }}
-                - name: CERTIFICATES_CAFILEPATTERN
-                  value: {{ .Values.certificates.caFilePattern }}
-                - name: CERTIFICATES_SOURCEFOLDER
+                - name: CERTIFICATES_SECRET
+                  value: {{ .Release.Name }}-{{ .Values.certificates.secret }}
+                - name: CONFIG_CONFIGLOADER
+                  value: "{{ .Values.config.configLoader | join "," }}"
+                - name: CONFIG_PUBKEYLOADER
+                  value: "{{ .Values.config.pubKeyLoader | join "," }}"  
+                {{- if .Values.pubKeyLoader.x509 }} 
+                - name: X509_REPO
+                  value: {{ .Values.pubKeyLoader.x509.repo }}
+                - name: X509_CERTFILEPATTERN
+                  value: {{ .Values.pubKeyLoader.x509.certFilePattern }}
+                - name: X509_CAFILEPATTERN
+                  value: {{ .Values.pubKeyLoader.x509.caFilePattern }}
+                - name: X509_SOURCEFOLDER
                   value: {{ .Values.certificates.sourceFolder }}
+                {{ end }} 
+                {{- if .Values.pubKeyLoader.did }} 
+                - name: DID_REPO
+                  value: {{ .Values.pubKeyLoader.did.resolverUrl }}
+                {{ end }} 
                 - name: CONTROLLER_CONFIG_MAP
                   value: {{ .Values.controller.config.map }}
                 - name: CONTROLLER_CONFIG_NAMESPACE
                   value: {{ .Values.controller.namespace }}
-                - name: CERTIFICATES_SECRET
-                  value: {{ .Release.Name }}-{{ .Values.certificates.secret }}
                 - name: INGRESS_NAME
                   value: {{ .Values.ingress.name }}
                 - name: INGRESS_NAMESPACE
@@ -55,6 +67,8 @@ spec:
               resources: {}
               volumeMounts:
                 - name: {{ .Release.Name }}-bot-config
-                  mountPath: /tmp
+                  mountPath: /tmp/bot
+                - name: {{ .Release.Name }}-did-config
+                  mountPath: /tmp/did
               imagePullPolicy: Always
           restartPolicy: Never
