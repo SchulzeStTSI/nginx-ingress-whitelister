@@ -6,8 +6,20 @@ import uuid
 
 class x509Loader:
     def loadKeys(self,config:dict):
+        keys_to_check = ["TMPDIR", 
+                         "CADIR", 
+                         "TLSDIR",
+                         "X509_CAFILEPATTERN",
+                         "X509_SOURCEFOLDER",
+                         "X509_REPO",
+                         "X509_CERTFILEPATTERN"]
+        
+        if all(key in config for key in keys_to_check):
+             print("All keys are present.")
+        else:
+            print("Some keys are missing.")
+
         try: 
-            
             temp_dir = config["TMPDIR"]
             caPath = config["CADIR"]
             tlsPath = config["TLSDIR"]

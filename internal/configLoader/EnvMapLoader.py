@@ -1,7 +1,7 @@
 
 import os
 
-class gitRepoEnvMapLoader:
+class EnvMapLoader:
     def load(self) -> dict:
         config={}
         config["X509_CAFILEPATTERN"]=os.environ.get("X509_CAFILEPATTERN")

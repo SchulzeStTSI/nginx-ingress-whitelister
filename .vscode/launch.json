@@ -17,7 +17,7 @@
                 "X509_CERTFILEPATTERN":"TLS*.pem",
                 "X509_SOURCEFOLDER": "TLS",
                 "X509_REPO": "https://github.com/WorldHealthOrganization/tng-participants-dev",
-                "CONFIG_CONFIGLOADER": "internal.configLoader.didConfigMapLoader.didConfigMapLoader,internal.configLoader.gitRepoEnvMapLoader.gitRepoEnvMapLoader",
+                "CONFIG_CONFIGLOADER": "internal.configLoader.ConfigMapLoader.ConfigMapLoader,internal.configLoader.EnvMapLoader.EnvMapLoader",
                 "CONFIG_PUBKEYLOADER": "internal.pubKeyLoader.didLoader.didLoader,internal.pubKeyLoader.x509Loader.x509Loader",
                 "CERTIFICATES_CERTPINNING": "true"
 

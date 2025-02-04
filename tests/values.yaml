@@ -5,9 +5,10 @@ controller:
 config:
   repo: https://github.com/SchulzeStTSI/nginx-ingress-whitelister
   tag: dev
+  map:
   configLoader:
-    - internal.configLoader.didConfigMapLoader.didConfigMapLoader
-    - internal.configLoader.gitRepoEnvMapLoader.gitRepoEnvMapLoader
+    - internal.configLoader.ConfigMapLoader.ConfigMapLoader
+    - internal.configLoader.EnvMapLoader.EnvMapLoader
   pubKeyLoader:
     - internal.pubKeyLoader.didLoader.didLoader
     - internal.pubKeyLoader.x509Loader.x509Loader
@@ -20,8 +21,12 @@ pubKeyLoader:
   sourceFolder: TLS
   certFilePattern: TLS*.pem
   caFilePattern: CA*.pem
- did:
+ didDoc:
   resolverUrl: http://localhost:8080/1.0/identifiers/
+  dids: 
+  verificationMethods:
+    tlsFilter: 
+    caFilter:
 ingress:
   name: test-ingress
 job: 

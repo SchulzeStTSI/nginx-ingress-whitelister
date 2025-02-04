@@ -29,6 +29,8 @@ spec:
                   value: {{ .Release.Name }}
                 - name: CONFIG_TAG
                   value: {{ .Values.config.tag }}
+                - name: CONFIG_MAP
+                  value: {{ .Values.config.map }}
                 - name: CONFIG_REPO
                   value: {{ .Values.config.repo }}
                 - name: CERTIFICATES_SECRET
@@ -48,8 +50,14 @@ spec:
                   value: {{ .Values.certificates.sourceFolder }}
                 {{ end }} 
                 {{- if .Values.pubKeyLoader.did }} 
-                - name: DID_REPO
+                - name: DID_DOC_RESOLVER_URL
                   value: {{ .Values.pubKeyLoader.did.resolverUrl }}
+                - name: DID_DOC_DIDS
+                  value: "{{ .Values.pubKeyLoader.didDoc.dids| join "," }}"
+                - name: DID_DOC_VER_TLS_FILTER
+                  value: "{{ .Values.pubKeyLoader.didDoc.verificationMethods.tlsFilter| join ","  }}"
+                - name: DID_DOC_VER_CA_FILTER
+                  value: "{{ .Values.pubKeyLoader.didDoc.verificationMethods.caFilter| join ","  }}"
                 {{ end }} 
                 - name: CONTROLLER_CONFIG_MAP
                   value: {{ .Values.controller.config.map }}
