@@ -71,7 +71,7 @@ spec:
                   value: {{ .Release.Namespace}}
               args:
                 - /bin/sh
-                - /tmp/script.sh
+                - /tmp/bot/script.sh
               resources: {}
               volumeMounts:
                 - name: {{ .Release.Name }}-bot-config

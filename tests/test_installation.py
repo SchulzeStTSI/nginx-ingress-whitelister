@@ -3,11 +3,11 @@ from testUtils import helm_chart,setup_helm_chart,teardown_helm_chart, wait_for_
 
 # Pytest test
 @pytest.mark.parametrize("release_name,deployment_name,helm_chart_values,values_file", [
-    ("my-release", "test-deployment", {"replicaCount": 2}, "./values.yaml")
+    ("whitelister", "test-deployment", {"replicaCount": 2}, "tests/values.yaml")
 ])
 def test_helm_chart(helm_chart, release_name, deployment_name, helm_chart_values, values_file):
     namespace = "test-namespace"
-    chart_path = "../helm"  # Path to your testDeployment chart
+    chart_path = "helm"  # Path to your testDeployment chart
 
     # Install Helm chart
     helm_chart(release_name, chart_path, namespace, helm_chart_values, values_file=values_file)

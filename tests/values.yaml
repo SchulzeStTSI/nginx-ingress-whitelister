@@ -11,13 +11,13 @@ config:
     - internal.configLoader.EnvMapLoader.EnvMapLoader
   pubKeyLoader:
     - internal.pubKeyLoader.didLoader.didLoader
-    - internal.pubKeyLoader.x509Loader.x509Loader
+    - internal.pubKeyLoader.gitLoader.gitLoader
 certificates:
   secret: gateway-ca-bundle
   certPinning: "true"
 pubKeyLoader:
  x509:
-  repo: https://github.com/WorldHealthOrganization/tng-participants-dev
+  repo: https://github.com/SchulzeStTSI/nginx-ingress-whitelister.git
   sourceFolder: TLS
   certFilePattern: TLS*.pem
   caFilePattern: CA*.pem
@@ -31,3 +31,6 @@ ingress:
   name: test-ingress
 job: 
   schedule: '*/1 * * * *'
+universal-resolver:
+  service:
+    port: 8081

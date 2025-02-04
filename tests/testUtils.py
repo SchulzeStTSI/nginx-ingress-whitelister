@@ -4,9 +4,23 @@ import time
 from kubernetes import client, config
 ### Fixtures for Helm management
 import pytest
+import os
 
 # Function to install a Helm chart with optional values and a values file
 def install_helm_chart(release_name, chart_path, namespace, values=None, values_file=None):
+    cwd = os.getcwd()
+    chart_path  = os.path.join(cwd,chart_path)
+
+    command = [
+        "helm", "dependency", "build", chart_path
+    ]
+
+    try:
+        subprocess.run(command, check=True, stderr=subprocess.PIPE, text=True)
+    except subprocess.CalledProcessError as e:
+     print(f"Fehler: {e}")  # Gibt die Exception aus
+     return
+
     command = [
         "helm", "install", release_name, chart_path, "-n", namespace, "--create-namespace"
     ]
@@ -14,8 +28,12 @@ def install_helm_chart(release_name, chart_path, namespace, values=None, values_
         for key, value in values.items():
             command.extend(["--set", f"{key}={value}"])
     if values_file:
-        command.extend(["-f", values_file])
-    subprocess.run(command, check=True)
+        vF = os.path.join(cwd,values_file)
+        command.extend(["-f", vF])
+    try:
+        subprocess.run(command, check=True, stderr=subprocess.PIPE, text=True)
+    except subprocess.CalledProcessError as e:
+     print(f"Fehler: {e}")  # Gibt die Exception aus
 
 # Function to uninstall a Helm chart
 def uninstall_helm_chart(release_name, namespace):
@@ -24,7 +42,7 @@ def uninstall_helm_chart(release_name, namespace):
     ], check=True)
 
 # Function to wait for a specific log message in a Kubernetes job
-def wait_for_job_log(job_name, namespace, search_text, timeout=200, interval=10):
+def wait_for_job_log(job_name, namespace, search_text, timeout=60, interval=10):
     config.load_kube_config()
     v1 = client.CoreV1Api()
 

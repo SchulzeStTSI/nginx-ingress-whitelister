@@ -4,7 +4,7 @@ import glob
 
 import uuid 
 
-class x509Loader:
+class gitLoader:
     def loadKeys(self,config:dict):
         keys_to_check = ["TMPDIR", 
                          "CADIR", 
