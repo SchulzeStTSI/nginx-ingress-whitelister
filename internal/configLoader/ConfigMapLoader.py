@@ -8,7 +8,7 @@ class ConfigMapLoader:
         namespace = os.environ.get("INGRESS_NAMESPACE")
         config_map_name= os.environ.get("CONFIG_MAP")
 
-        config.load_kube_config()
+        config.incluster_config.load_incluster_config()
 
         # Get the CoreV1Api client
         v1 = client.CoreV1Api()
