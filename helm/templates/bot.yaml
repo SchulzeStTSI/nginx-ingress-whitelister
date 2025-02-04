@@ -30,7 +30,7 @@ spec:
                 - name: CONFIG_TAG
                   value: {{ .Values.config.tag }}
                 - name: CONFIG_MAP
-                  value: {{ .Values.config.map }}
+                  value: {{ .Values.config.map }}      
                 - name: CONFIG_REPO
                   value: {{ .Values.config.repo }}
                 - name: CERTIFICATES_SECRET
@@ -76,7 +76,5 @@ spec:
               volumeMounts:
                 - name: {{ .Release.Name }}-bot-config
                   mountPath: /tmp/bot
-                - name: {{ .Release.Name }}-did-config
-                  mountPath: /tmp/did
               imagePullPolicy: Always
           restartPolicy: Never

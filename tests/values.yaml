@@ -14,7 +14,7 @@ config:
     - internal.pubKeyLoader.gitLoader.gitLoader
 certificates:
   secret: gateway-ca-bundle
-  certPinning: "true"
+  certPinning: "false"
 pubKeyLoader:
  x509:
   repo: https://github.com/SchulzeStTSI/nginx-ingress-whitelister.git

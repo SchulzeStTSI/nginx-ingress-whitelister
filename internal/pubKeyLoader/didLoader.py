@@ -44,6 +44,7 @@ class didLoader:
              print("All keys are present.")
         else:
             print("Some keys are missing.")
+            return
 
         temp_dir = config["TMPDIR"]
         caPath = config["CADIR"]
