@@ -16,7 +16,7 @@ data:
     
     temp_folder=$(mktemp -d)
 
-    python /bot/loadKeys.py $temp_folder
+    python /bot/loadKeys.py /bot/internal/interface.json $temp_folder
 
     certPinning="{{ .Values.certificates.certPinning}}"
     

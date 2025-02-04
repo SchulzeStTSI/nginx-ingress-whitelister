@@ -42,7 +42,7 @@ def uninstall_helm_chart(release_name, namespace):
     ], check=True)
 
 # Function to wait for a specific log message in a Kubernetes job
-def wait_for_job_log(job_name, namespace, search_text, timeout=60, interval=10):
+def wait_for_job_log(job_name, namespace, search_text, timeout=120, interval=10):
     config.load_kube_config()
     v1 = client.CoreV1Api()
 

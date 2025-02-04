@@ -4,8 +4,15 @@ from collections import ChainMap
 import tempfile
 import sys
 
+if len(sys.argv) > 1:
+       jsonF = sys.argv[1]
+else: 
+      jsonF = "./internal/interface.json"
+
+
+
 # Initialize the IoC container with the interface file
-ioc = IoCContainer(services_json_file="./internal/interface.json")
+ioc = IoCContainer(services_json_file=jsonF)
 
 # Get the environment variable for services to load
 configLoader = os.getenv("CONFIG_CONFIGLOADER", "")
@@ -41,8 +48,8 @@ for service_name in pubKeyLoaderServices:
 # List all services registered in the container
 print(f"Services registered: {ioc.list_services()}")
 
-if len(sys.argv) > 1:
-       tmpPath = sys.argv[1]
+if len(sys.argv) > 2:
+       tmpPath = sys.argv[2]
 else: 
       tmpPath = tempfile.mktemp()
       os.mkdir(tmpPath)
