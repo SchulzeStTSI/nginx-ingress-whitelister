@@ -1,4 +1,5 @@
-controller:
+image: 
+ontroller:
   config:
     map: addon-http-application-routing-nginx-configuration
   namespace: ingress-nginx

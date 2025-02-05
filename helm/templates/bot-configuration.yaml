@@ -6,14 +6,6 @@ metadata:
 data:
   script.sh: |
     #!/bin/sh
-    apk add --update py-pip	> /dev/null
-    apk add --update git > /dev/null
-    apk add --update bash > /dev/null
-    apk add --update openssl > /dev/null
-    git clone $CONFIG_REPO --branch $CONFIG_TAG bot
-
-    pip install -r /bot/requirements.txt > /dev/null
-    
     temp_folder=$(mktemp -d)
 
     python /bot/loadKeys.py /bot/internal/interface.json $temp_folder
@@ -30,5 +22,4 @@ data:
     python /bot/updateCaBundle.py $temp_folder/CA 
     python /bot/annotateIngress.py
 
-    rm -rf /bot
     rm -rf $temp_folder
