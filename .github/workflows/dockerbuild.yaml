@@ -28,11 +28,16 @@ jobs:
       - name: Set Docker image tags (lowercase)
         id: vars
         run: |
-          IMAGE_NAME="ghcr.io/${{ github.repository }}"
-          
-          # Branch-Name in Kleinbuchstaben umwandeln
+          # Repository Name und Nutzername in lowercase umwandeln
+          REPO_NAME=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+
+          # Branch-Name in lowercase umwandeln
           BRANCH_NAME=$(echo "${GITHUB_REF#refs/heads/}" | tr '[:upper:]' '[:lower:]')
+          
+          # Commit Hash in lowercase
           SHORT_SHA=$(echo "${GITHUB_SHA::7}" | tr '[:upper:]' '[:lower:]')
+
+          IMAGE_NAME="ghcr.io/${REPO_NAME}"
 
           # Prüfen, ob der Branch der Default-Branch ist
           if [[ "${BRANCH_NAME}" == "$(echo '${{ github.event.repository.default_branch }}' | tr '[:upper:]' '[:lower:]')" ]]; then
