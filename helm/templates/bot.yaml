@@ -17,10 +17,6 @@ spec:
               configMap:
                 name: {{ .Release.Name }}-bot-config
                 defaultMode: 420
-            - name: {{ .Release.Name }}-did-config
-              configMap:
-                name: {{ .Release.Name }}-did-config
-                defaultMode: 420
           containers:
             - name: {{ .Release.Name }}-bot
               image: alpine:3.18

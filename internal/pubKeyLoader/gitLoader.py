@@ -18,6 +18,7 @@ class gitLoader:
              print("All keys are present.")
         else:
             print("Some keys are missing.")
+            return
 
         try: 
             temp_dir = config["TMPDIR"]
