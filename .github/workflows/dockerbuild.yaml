@@ -25,15 +25,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set Docker image tags
+      - name: Set Docker image tags (lowercase)
         id: vars
         run: |
-          IMAGE_NAME=ghcr.io/${{ github.repository }}
-          BRANCH_NAME=${GITHUB_REF#refs/heads/}
-          SHORT_SHA=${GITHUB_SHA::7}
+          IMAGE_NAME="ghcr.io/${{ github.repository }}"
+          
+          # Branch-Name in Kleinbuchstaben umwandeln
+          BRANCH_NAME=$(echo "${GITHUB_REF#refs/heads/}" | tr '[:upper:]' '[:lower:]')
+          SHORT_SHA=$(echo "${GITHUB_SHA::7}" | tr '[:upper:]' '[:lower:]')
 
           # Prüfen, ob der Branch der Default-Branch ist
-          if [[ "${BRANCH_NAME}" == "${{ github.event.repository.default_branch }}" ]]; then
+          if [[ "${BRANCH_NAME}" == "$(echo '${{ github.event.repository.default_branch }}' | tr '[:upper:]' '[:lower:]')" ]]; then
             echo "LATEST_TAG=${IMAGE_NAME}:latest" >> $GITHUB_ENV
           else
             echo "LATEST_TAG=" >> $GITHUB_ENV  # Kein "latest"-Tag setzen
