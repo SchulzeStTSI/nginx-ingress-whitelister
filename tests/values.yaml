@@ -1,11 +1,9 @@
-image: ghcr.io/SchulzeStTSI/nginx-ingress-whitelister:dev
+image: ghcr.io/schulzesttsi/nginx-ingress-whitelister:dev
 controller:
   config:
     map: ingress-nginx-controller
   namespace: ingress-nginx
 config:
-  repo: https://github.com/SchulzeStTSI/nginx-ingress-whitelister
-  tag: dev
   map:
   configLoader:
     - internal.configLoader.ConfigMapLoader.ConfigMapLoader

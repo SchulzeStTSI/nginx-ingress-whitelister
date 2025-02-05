@@ -23,12 +23,8 @@ spec:
               env:  
                 - name: RELEASE_NAME
                   value: {{ .Release.Name }}
-                - name: CONFIG_TAG
-                  value: {{ .Values.config.tag }}
                 - name: CONFIG_MAP
                   value: {{ .Values.config.map }}      
-                - name: CONFIG_REPO
-                  value: {{ .Values.config.repo }}
                 - name: CERTIFICATES_SECRET
                   value: {{ .Release.Name }}-{{ .Values.certificates.secret }}
                 - name: CONFIG_CONFIGLOADER

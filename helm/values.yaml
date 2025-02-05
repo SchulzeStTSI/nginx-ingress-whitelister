@@ -1,11 +1,9 @@
-image: ghcr.io/SchulzeStTSI/nginx-ingress-whitelister:dev
+image: ghcr.io/schulzesttsi/nginx-ingress-whitelister:dev
 ontroller:
   config:
     map: addon-http-application-routing-nginx-configuration
   namespace: ingress-nginx
 config:
-  repo: https://github.dev/WorldHealthOrganization/nginx-ingress-whitelister
-  tag: main
   map:
   configLoader:
     - internal.configLoader.ConfigMapLoader.ConfigMapLoader
