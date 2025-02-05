@@ -19,7 +19,7 @@ spec:
                 defaultMode: 420
           containers:
             - name: {{ .Release.Name }}-bot
-              image: alpine:3.18
+              image: {{ .Values.image}}
               env:  
                 - name: RELEASE_NAME
                   value: {{ .Release.Name }}

@@ -1,4 +1,4 @@
-image: 
+image: ghcr.io/SchulzeStTSI/nginx-ingress-whitelister:dev
 ontroller:
   config:
     map: addon-http-application-routing-nginx-configuration
